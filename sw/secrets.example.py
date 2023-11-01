@@ -7,3 +7,6 @@ class wifi:
 class mqtt:
     host = 'mqtt://yourserver.com:1883'
     topic = 'your.topic'
+    port = 1883
+    user = 'myuser'
+    password = 'mypass'
