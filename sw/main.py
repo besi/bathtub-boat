@@ -12,6 +12,17 @@ mqtt_port = secrets.mqtt.port
 mqtt_user = secrets.mqtt.user
 mqtt_password = secrets.mqtt.password
 
+
+# 1 Wire
+import machine
+import onewire, ds18x20
+dat = machine.Pin(33)
+ds = ds18x20.DS18X20(onewire.OneWire(dat))
+sensors = ds.scan()
+print('found devices:', sensors)
+
+
+
 def connect():
   # if you set keepalive value - you have to send something to mqtt server to inform that you are alive in less time than keepalive value of seconds.
   client = MQTTClient(client_id, mqtt_server, mqtt_port, mqtt_user, mqtt_password,keepalive=1000)
@@ -33,8 +44,9 @@ except OSError as e:
 
 while True:
   try:
-      print("Sending message to MQTT host")
-      client.publish(topic_pub, bytes('hello', 'utf-8'))
-      time.sleep(1.0)
+    ds.convert_temp()
+    for sensor in sensors:
+      client.publish(topic_pub, bytes('{"temp":%f}'% ds.read_temp(sensor), 'utf-8'))
+    time.sleep(1.0)
   except OSError as e:
     restart_and_reconnect()
