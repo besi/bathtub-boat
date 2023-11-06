@@ -4,6 +4,8 @@ import ubinascii
 import umqttsimple
 from umqttsimple import MQTTClient 
 
+DELAY = 5
+
 ## MQTT
 client_id = ubinascii.hexlify(machine.unique_id())
 topic_pub = secrets.mqtt.topic
@@ -47,6 +49,6 @@ while True:
     ds.convert_temp()
     for sensor in sensors:
       client.publish(topic_pub, bytes('{"temp":%f}'% ds.read_temp(sensor), 'utf-8'))
-    time.sleep(1.0)
+    time.sleep(DELAY)
   except OSError as e:
     restart_and_reconnect()
