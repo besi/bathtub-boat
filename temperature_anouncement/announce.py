@@ -12,7 +12,7 @@ mqtt_password = secrets.mqtt.password
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to MQTT server '%s'" % mqtt_server)
-        client.subscribe("services/temperature")
+        client.subscribe("services/bathtub")
 
 
 def on_message(client, userdata, msg):
@@ -23,9 +23,12 @@ def execute_shell(commands):
 
 
 def handleMessage(msg):
-    tag = msg.payload.decode("utf-8").strip()
-    print(tag)
-    execute_shell(['say', 'todo'])
+    import json
+    data = msg.payload.decode("utf-8").strip()
+    temp = int(json.loads(data)['temp'])
+    string = f"{int(temp)} degrees"
+    print(string)
+    execute_shell(['say', string])
 
 
 client = mqtt.Client(client_id="", clean_session=True, userdata=None, protocol=mqtt.MQTTv31, transport="tcp")
