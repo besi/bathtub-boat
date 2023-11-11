@@ -5,8 +5,9 @@ After=network-online.target
 
 [Service]
 User=pi
-WorkingDirectory=/home/pi/bathtub-boat
-ExecStart=/usr/bin/python3 /home/pi/bathtub-boat/announce.py 
+WorkingDirectory=/home/pi/bathtub-boat/temperature_anouncement
+ExecStart=/usr/bin/python3 announce.py
 
 [Install]
 WantedBy=network-online.target
+

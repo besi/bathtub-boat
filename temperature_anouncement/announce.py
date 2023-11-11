@@ -9,6 +9,8 @@ mqtt_user = secrets.mqtt.user
 mqtt_password = secrets.mqtt.password
 
 
+LAST_TEMP = -1
+
 def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to MQTT server '%s'" % mqtt_server)
@@ -23,12 +25,16 @@ def execute_shell(commands):
 
 
 def handleMessage(msg):
+    global LAST_TEMP
     import json
     data = msg.payload.decode("utf-8").strip()
     temp = int(json.loads(data)['temp'])
     string = f"{int(temp)} degrees"
-    print(string)
-    execute_shell(['say', string])
+    
+    if temp != LAST_TEMP:
+        print(string)
+        execute_shell(['say', string])
+        LAST_TEMP = temp
 
 
 client = mqtt.Client(client_id="", clean_session=True, userdata=None, protocol=mqtt.MQTTv31, transport="tcp")
