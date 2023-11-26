@@ -29,7 +29,9 @@ def connect():
   # if you set keepalive value - you have to send something to mqtt server to inform that you are alive in less time than keepalive value of seconds.
   client = MQTTClient(client_id, mqtt_server, mqtt_port, mqtt_user, mqtt_password,keepalive=1000)
   client.connect()
+  client.set_last_will(topic_pub, '{{ "status":"offline"}} ', retain=False, qos=0)
   print('Connected to %s MQTT broker' % mqtt_server)
+  
   return client
 
 
