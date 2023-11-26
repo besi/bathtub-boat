@@ -51,7 +51,9 @@ while True:
   try:
     ds.convert_temp()
     for sensor in sensors:
-      client.publish(topic_pub, bytes('{"temp":%f}'% ds.read_temp(sensor), 'utf-8'))
+        t = ds.read_temp(sensor)
+        print("Temperature: %f" % t) 
+        client.publish(topic_pub, bytes('{"temp":%f}'% t, 'utf-8'))
     time.sleep(DELAY)
   except OSError as e:
     restart_and_reconnect()
