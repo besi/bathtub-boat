@@ -22,8 +22,9 @@ dat = machine.Pin(33)
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
 sensors = ds.scan()
 print('found devices:', sensors)
-
-
+ds.read_temp(sensors[0]) # Prevent reading 85 Degrees at startup
+time.sleep(.5)
+ds.read_temp(sensors[0]) # Prevent reading 85 Degrees at startup
 
 def connect():
   # if you set keepalive value - you have to send something to mqtt server to inform that you are alive in less time than keepalive value of seconds.
