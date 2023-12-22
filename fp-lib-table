@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name "esp-01m")(type "KiCad")(uri "${KIPRJMOD}/lib/esp-01m/esp-01m.pretty")(options "")(descr ""))
+  (lib (name "tp4056")(type "KiCad")(uri "${KIPRJMOD}/lib/tp4056/tp4056.pretty")(options "")(descr ""))
+)
