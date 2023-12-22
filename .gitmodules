@@ -2,5 +2,5 @@
 	path = lib/esp-01m
 	url = https://github.com/besi/kicad-esp-01m
 [submodule "lib/tp4056"]
-	path = lib/kicad-tp4056
+	path = lib/tp4056
 	url = https://github.com/besi/kicad-tp4056
