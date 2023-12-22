@@ -3,3 +3,5 @@
 /temperature_anouncement/secrets.py
 plot
 *kicad_prl
+*info-cache
+*backups
