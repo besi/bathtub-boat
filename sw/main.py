@@ -18,7 +18,7 @@ mqtt_password = secrets.mqtt.password
 # 1 Wire
 import machine
 import onewire, ds18x20
-dat = machine.Pin(33)
+dat = machine.Pin(9)
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
 sensors = ds.scan()
 print('found devices:', sensors)
