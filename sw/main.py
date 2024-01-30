@@ -14,17 +14,24 @@ mqtt_port = secrets.mqtt.port
 mqtt_user = secrets.mqtt.user
 mqtt_password = secrets.mqtt.password
 
-
 # 1 Wire
 import machine
 import onewire, ds18x20
+from onewire import OneWireError
 dat = machine.Pin(9)
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
-sensors = ds.scan()
-print('found devices:', sensors)
-ds.read_temp(sensors[0]) # Prevent reading 85 Degrees at startup
-time.sleep(.5)
-ds.read_temp(sensors[0]) # Prevent reading 85 Degrees at startup
+
+
+def waitForSensors(ds):
+    sensors = []
+    while len(sensors) == 0:
+        sensors = ds.scan()
+        print('found devices:', sensors)
+        if len(sensors) == 0:
+            time.sleep(1)
+    return sensors
+
+sensors = waitForSensors(ds)
 
 def connect():
   # if you set keepalive value - you have to send something to mqtt server to inform that you are alive in less time than keepalive value of seconds.
@@ -47,13 +54,21 @@ try:
 except OSError as e:
   restart_and_reconnect()
 
+startup = True
+
+
 while True:
   try:
     ds.convert_temp()
     for sensor in sensors:
         t = ds.read_temp(sensor)
-        print("Temperature: %f" % t) 
+        if startup and int(t) == 85:
+            continue
+        print("Temperature: %f" % t)
         client.publish(topic_pub, bytes('{"temp":%f}'% t, 'utf-8'))
     time.sleep(DELAY)
+  except OneWireError as e:
+      print("Sensor lost")
+      sensors =  waitForSensors(ds)
   except OSError as e:
     restart_and_reconnect()
