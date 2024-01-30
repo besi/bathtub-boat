@@ -7,3 +7,6 @@
 [submodule "lib/magnetic-charger"]
 	path = lib/magnetic-charger
 	url = https://github.com/besi/kicad-magnetic-charger
+[submodule "lib/as12ap"]
+	path = lib/as12ap
+	url = https://github.com/besi/kicad-as12ap

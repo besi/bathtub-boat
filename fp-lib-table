@@ -3,4 +3,5 @@
   (lib (name "tp4056")(type "KiCad")(uri "${KIPRJMOD}/lib/tp4056/tp4056.pretty")(options "")(descr ""))
   (lib (name "magnetic-charger")(type "KiCad")(uri "${KIPRJMOD}/lib/magnetic-charger/magnetic-charger.pretty")(options "")(descr ""))
   (lib (name "pts636")(type "KiCad")(uri "${KIPRJMOD}/lib/pts636/pts636.pretty")(options "")(descr ""))
+  (lib (name "as12ap")(type "KiCad")(uri "${KIPRJMOD}/lib/as12ap/as12ap.pretty")(options "")(descr ""))
 )

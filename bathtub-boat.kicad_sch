@@ -1341,7 +1341,7 @@
     (uuid 22efc92b-b9be-4db4-9841-9ce20d95d505)
     (property "Reference" "SW3" (id 0) (at 102.87 53.34 0))
     (property "Value" "POWER" (id 1) (at 102.87 55.88 0))
-    (property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" (id 2) (at 102.87 60.96 0)
+    (property "Footprint" "as12ap:as12ap" (id 2) (at 102.87 60.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 102.87 60.96 0)
@@ -2172,7 +2172,7 @@
       (reference "SW2") (unit 1) (value "RESET") (footprint "pts636:pts636")
     )
     (path "/22efc92b-b9be-4db4-9841-9ce20d95d505"
-      (reference "SW3") (unit 1) (value "POWER") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical")
+      (reference "SW3") (unit 1) (value "POWER") (footprint "as12ap:as12ap")
     )
     (path "/51a0c016-46fc-4088-9ec6-8953b40e18ca"
       (reference "SW4") (unit 1) (value "A") (footprint "pts636:pts636")
