@@ -45,6 +45,7 @@ def connect():
   client.connect()
   print('Connected to %s MQTT broker' % mqtt_server)
   
+  client.publish(topic_pub, bytes('{"status":"hello"}', 'utf-8'))
   return client
 
 
