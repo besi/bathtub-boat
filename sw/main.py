@@ -21,6 +21,8 @@ from onewire import OneWireError
 dat = machine.Pin(9)
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
 
+# If another sensor is plugged in the internal one will be ignored.
+internalSensor = bytearray(b'(\xd8)\x95\xf0\x01<D')
 
 def waitForSensors(ds):
     sensors = []
@@ -29,15 +31,18 @@ def waitForSensors(ds):
         print('found devices:', sensors)
         if len(sensors) == 0:
             time.sleep(1)
+        if len(sensors) > 1:
+            print("Ignoring internal sensor")
+            sensors.remove(internalSensor)
     return sensors
 
 sensors = waitForSensors(ds)
 
 def connect():
   # if you set keepalive value - you have to send something to mqtt server to inform that you are alive in less time than keepalive value of seconds.
-  client = MQTTClient(client_id, mqtt_server, mqtt_port, mqtt_user, mqtt_password,keepalive=1000)
-  client.connect()
+  client = MQTTClient(client_id, mqtt_server, mqtt_port, mqtt_user, mqtt_password,keepalive=DELAY * 2)
   client.set_last_will(topic_pub, '{{ "status":"offline"}} ', retain=False, qos=0)
+  client.connect()
   print('Connected to %s MQTT broker' % mqtt_server)
   
   return client
@@ -72,3 +77,6 @@ while True:
       sensors =  waitForSensors(ds)
   except OSError as e:
     restart_and_reconnect()
+  except Exception as e:
+      print("Sensor lost")
+      sensors =  waitForSensors(ds)
