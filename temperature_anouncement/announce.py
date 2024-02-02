@@ -15,6 +15,7 @@ def on_connect(client, userdata, flags, rc):
     if rc == 0:
         print("Connected to MQTT server '%s'" % mqtt_server)
         client.subscribe("services/bathtub")
+        execute_shell(['say', 'temperature announcement started'])
 
 
 def on_message(client, userdata, msg):
@@ -27,16 +28,26 @@ def execute_shell(commands):
 def handleMessage(msg):
     global LAST_TEMP
     import json
-    data = msg.payload.decode("utf-8").strip()
-    temp = int(json.loads(data)['temp'])
-    string = f"{int(temp)} degrees"
+    print(msg.payload.decode('utf-8'))
+    payload = msg.payload.decode("utf-8").strip()
+    data = json.loads(payload)
+    if 'temp' in data:
+        temp = int(data['temp'])
+        string = f"{int(temp)} degrees"
+        if temp != LAST_TEMP:
+            print(string)
+            execute_shell(['say', string])
+            LAST_TEMP = temp
     
-    if temp != LAST_TEMP:
-        print(string)
-        execute_shell(['say', string])
-        LAST_TEMP = temp
+    if 'status' in data:
+        status = data['status']
+        LAST_TEMP = -1
+        if status == 'hello':
+            execute_shell(['say', 'sensor detected'])
+        if status == 'offline':
+            execute_shell(['say', 'sensor disconnected'])
 
-
+print("Starting...")
 client = mqtt.Client(client_id="", clean_session=True, userdata=None, protocol=mqtt.MQTTv31, transport="tcp")
 client.on_connect = on_connect
 client.on_message = on_message
