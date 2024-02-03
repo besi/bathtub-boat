@@ -28,7 +28,7 @@ def execute_shell(commands):
 def handleMessage(msg):
     global LAST_TEMP
     import json
-    print(msg.payload.decode('utf-8'))
+    # print(msg.payload.decode('utf-8'))
     payload = msg.payload.decode("utf-8").strip()
     data = json.loads(payload)
     if 'temp' in data:
