@@ -10,3 +10,6 @@
 [submodule "lib/as12ap"]
 	path = lib/as12ap
 	url = https://github.com/besi/kicad-as12ap
+[submodule "lib/pts636"]
+	path = lib/pts636
+	url = https://github.com/besi/kicad-pts636
