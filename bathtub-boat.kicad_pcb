@@ -1390,7 +1390,7 @@
 
   (footprint "kibuzzard-65B79597" (layer "F.Cu")
     (tstamp 30ac04b3-94a0-479b-8cf1-f77be97dd94d)
-    (at 109.140179 89.026234)
+    (at 107.21 89.42)
     (descr "Generated with KiBuzzard")
     (tags "kb_params=eyJBbGlnbm1lbnRDaG9pY2UiOiAiUmlnaHQiLCAiQ2FwTGVmdENob2ljZSI6ICJbIiwgIkNhcFJpZ2h0Q2hvaWNlIjogIl0iLCAiRm9udENvbWJvQm94IjogIkJlcmtlbGV5TW9uby1Cb2xkIiwgIkhlaWdodEN0cmwiOiAiLjgiLCAiTGF5ZXJDb21ib0JveCI6ICJGLlNpbGtTIiwgIk11bHRpTGluZVRleHQiOiAiUkVTRVQiLCAiUGFkZGluZ0JvdHRvbUN0cmwiOiAiNSIsICJQYWRkaW5nTGVmdEN0cmwiOiAiNSIsICJQYWRkaW5nUmlnaHRDdHJsIjogIjUiLCAiUGFkZGluZ1RvcEN0cmwiOiAiNSIsICJXaWR0aEN0cmwiOiAiIn0=")
     (attr board_only exclude_from_pos_files exclude_from_bom)
@@ -1654,7 +1654,7 @@
     (property "ki_keywords" "mounting hole")
     (path "/30615862-2396-43d8-a9d7-8072b02ee593")
     (attr exclude_from_pos_files)
-    (fp_text reference "H1" (at 0 -4.2) (layer "F.SilkS")
+    (fp_text reference "H1" (at 0 -4.2) (layer "F.SilkS") hide
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 273c292b-d8f1-442b-ac8f-46966e192cce)
     )
@@ -2253,6 +2253,10 @@
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp 8bf2413e-5fab-4002-8c2a-7d6a5a7c37d0)
     )
+    (fp_text user "Play-Zone NP" (at -6.361093 4.51 unlocked) (layer "F.SilkS")
+        (effects (font (size 1 1) (thickness 0.15)))
+      (tstamp c41d3ae0-ed69-4c00-9938-113e85ed07b6)
+    )
     (fp_text user "${REFERENCE}" (at 3.2385 -3.96) (layer "F.Fab")
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp d349d5e7-350e-4c61-8d98-8b6b35e0c00e)
@@ -2753,7 +2757,7 @@
 
   (footprint "kibuzzard-65B796FD" (layer "F.Cu")
     (tstamp 8a1bae25-b0e7-4684-8f1a-ada27054434b)
-    (at 117 72.4)
+    (at 107.45017 70.0133)
     (descr "Generated with KiBuzzard")
     (tags "kb_params=eyJBbGlnbm1lbnRDaG9pY2UiOiAiUmlnaHQiLCAiQ2FwTGVmdENob2ljZSI6ICJbIiwgIkNhcFJpZ2h0Q2hvaWNlIjogIl0iLCAiRm9udENvbWJvQm94IjogIkJlcmtlbGV5TW9uby1Cb2xkIiwgIkhlaWdodEN0cmwiOiAiLjgiLCAiTGF5ZXJDb21ib0JveCI6ICJGLlNpbGtTIiwgIk11bHRpTGluZVRleHQiOiAiU1BJXG4iLCAiUGFkZGluZ0JvdHRvbUN0cmwiOiAiOSIsICJQYWRkaW5nTGVmdEN0cmwiOiAiMyIsICJQYWRkaW5nUmlnaHRDdHJsIjogIjMiLCAiUGFkZGluZ1RvcEN0cmwiOiAiNyIsICJXaWR0aEN0cmwiOiAiIn0=")
     (attr board_only exclude_from_pos_files exclude_from_bom)
@@ -4074,7 +4078,7 @@
 
   (footprint "LOGO" (layer "F.Cu")
     (tstamp f6830124-ab52-4b68-9f31-39fd9ca6c3b7)
-    (at 104.228102 91.652068)
+    (at 115.251113 94.605278)
     (attr board_only exclude_from_pos_files exclude_from_bom)
     (fp_text reference "G***" (at 0 0) (layer "F.SilkS") hide
         (effects (font (size 1.524 1.524) (thickness 0.3)))
@@ -11380,6 +11384,8 @@
     )
   )
 
+  (gr_line (start 144.84173 78.722864) (end 139.540407 80.955)
+    (stroke (width 0.15) (type default)) (layer "F.SilkS") (tstamp fbcf00d5-394f-473d-86a1-4cd1c04ce660))
   (gr_arc (start 102.5 100.5) (mid 100.37868 99.62132) (end 99.5 97.5)
     (stroke (width 0.1) (type default)) (layer "Edge.Cuts") (tstamp 2629c3ed-00cd-4a6b-8bd5-718a4a8ce69e))
   (gr_arc (start 157.5 65.5) (mid 159.62132 66.37868) (end 160.5 68.5)
@@ -11399,10 +11405,7 @@
   (gr_text "#238" (at 120.018147 76.72) (layer "B.SilkS") (tstamp ba96dddc-2629-4d2b-a984-e9c1d4d516c0)
     (effects (font (size 3 3) (thickness 0.5)) (justify mirror))
   )
-  (gr_text "WARNING: Wiring of Neopixel is different" (at 123.72 62.75) (layer "F.SilkS") (tstamp 566a75c6-459c-4702-85b0-ddaf09ba3673)
-    (effects (font (size 1 1) (thickness 0.15)) (justify left bottom))
-  )
-  (gr_text "Bathtubboat v2.0\n22.02.2024" (at 119.148 75.5) (layer "F.SilkS") (tstamp 909b8b26-3f00-4042-bc40-053e9194b4ca)
+  (gr_text "Bathtubboat v2.0\n4.02.2025\n@abcdef" (at 119.148 75.5) (layer "F.SilkS") (tstamp 909b8b26-3f00-4042-bc40-053e9194b4ca)
     (effects (font (size 1.2 1.2) (thickness 0.2)))
   )
   (gr_text "#238" (at 120.158991 85.869035) (layer "F.SilkS") (tstamp a3b7577e-f528-4cb2-9089-4170ff01661a)
