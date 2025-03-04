@@ -5,7 +5,7 @@ import umqttsimple
 from umqttsimple import MQTTClient 
 
 import neopixel
-np = neopixel.NeoPixel(machine.Pin(10),1) # New Pin 9
+np = neopixel.NeoPixel(machine.Pin(9),1)
 #### Careful GRB instead of RGB ###
 
 DELAY = 5
@@ -22,11 +22,11 @@ mqtt_password = secrets.mqtt.password
 import machine
 import onewire, ds18x20
 from onewire import OneWireError
-dat = machine.Pin(9) # New Pin 4
+dat = machine.Pin(4) # was pin 9
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
 
 # If another sensor is plugged in the internal one will be ignored.
-internalSensor = bytearray(b'(\xd8)\x95\xf0\x01<D')
+internalSensor = bytearray(b'\x10X\xc3\x9e\x03\x08\x00~')
 
 def waitForSensors(ds):
     np.fill((10,0,0));np.write()
