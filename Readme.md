@@ -29,3 +29,7 @@ Pinout:
 
 ## Version 1
 ![](boat.jpg)
+
+## Testing MQTT
+
+    mosquitto_pub -h $MQTT_HOST -t 'services/bathtub' -u $MQTT_USER -P $MQTT_PASS  -m '{"temp":41}' 
