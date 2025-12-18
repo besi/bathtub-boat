@@ -8,8 +8,8 @@ import neopixel
 np = neopixel.NeoPixel(machine.Pin(9),1)
 #### Careful GRB instead of RGB ###
 
-DELAY = 5
-IDEAL = 41
+DELAY = 3
+IDEAL = 40
 ## MQTT
 client_id = ubinascii.hexlify(machine.unique_id())
 topic_pub = secrets.mqtt.topic
@@ -25,18 +25,19 @@ from onewire import OneWireError
 dat = machine.Pin(4) # was pin 9
 ds = ds18x20.DS18X20(onewire.OneWire(dat))
 
-# If another sensor is plugged in the internal one will be ignored.
-internalSensor = bytearray(b'\x10X\xc3\x9e\x03\x08\x00~')
+print(f"Internal sensor 0x{secrets.internalSensor.hex()}")
 
 def waitForSensors(ds):
     np.fill((10,0,0));np.write()
     sensors = []
     while len(sensors) == 0:
         sensors = ds.scan()
-        print('found devices:', sensors)
+        [print(f"Found sensor 0x{sensor.hex()}") for sensor in sensors]
+
         if len(sensors) == 0:
             time.sleep(1)
         if len(sensors) > 1:
+            # If another sensor is plugged in the internal one will be ignored.
             print("Ignoring internal sensor")
             sensors.remove(internalSensor)
     np.fill((10,10,10));np.write()
@@ -47,10 +48,10 @@ sensors = waitForSensors(ds)
 def connect():
   # if you set keepalive value - you have to send something to mqtt server to inform that you are alive in less time than keepalive value of seconds.
   client = MQTTClient(client_id, mqtt_server, mqtt_port, mqtt_user, mqtt_password,keepalive=DELAY * 2)
-  client.set_last_will(topic_pub, '{ "status":"offline"} ', retain=False, qos=0)
+  client.set_last_will(topic_pub, '{ "status":"offline","temp":0} ', retain=False, qos=0)
   client.connect()
   print('Connected to %s MQTT broker' % mqtt_server)
-  client.publish(topic_pub, bytes('{"status":"hello"}', 'utf-8'))
+  client.publish(topic_pub, bytes('{"status":"hello","temp":0}', 'utf-8'))
   return client
 
 
