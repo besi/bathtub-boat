@@ -1,3 +1,6 @@
+class boat:
+    internalSensor = bytearray(bytes.fromhex('deadbeef'))
+
 class wifi:
    aps = {
        'SSID1': 'PASSWORD1',
