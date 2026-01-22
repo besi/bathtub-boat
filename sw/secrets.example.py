@@ -9,7 +9,8 @@ class wifi:
 
 class mqtt:
     host = 'mqtt://yourserver.com'
-    topic = 'your.topic'
+    topic = b'your/topic'
+    topic_wled = b'wled/all/col'
     user = 'john'
     password = 'secret'
     port = 1883

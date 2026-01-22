@@ -32,4 +32,5 @@ Pinout:
 
 ## Testing MQTT
 
-    mosquitto_pub -h $MQTT_HOST -t 'services/bathtub' -u $MQTT_USER -P $MQTT_PASS  -m '{"temp":41}' 
+    mosquitto_pub -h $MQTT_HOST -t 'services/bathtub' -u $MQTT_USER -P $MQTT_PASSWORD  -m '{"temp":41}' 
+    mosquitto_pub -h $MQTT_HOST -t 'wled/all/col' -u $MQTT_USER -P $MQTT_PASSWORD  -m '#11ff00' 
