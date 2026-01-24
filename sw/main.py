@@ -15,6 +15,7 @@ IDEAL = 40
 client_id = ubinascii.hexlify(unique_id())
 topic_pub = secrets.mqtt.topic
 topic_wled = secrets.mqtt.topic_wled
+topic_wled_api = 'wled/all/api'
 mqtt_server = secrets.mqtt.host
 mqtt_port = secrets.mqtt.port
 mqtt_user = secrets.mqtt.user
@@ -54,6 +55,8 @@ def connect():
   client.connect()
   print('Connected to %s MQTT broker' % mqtt_server)
   client.publish(topic_pub, bytes('{"status":"hello","temp":-999}', 'utf-8'))
+  client.publish(topic_wled_api, bytes('{"on":true}', 'utf-8'))
+  
   return client
 
 
