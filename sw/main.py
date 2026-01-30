@@ -95,13 +95,14 @@ while True:
         t = ds.read_temp(sensor)
         if startup and (int(t) == 85 or int(t) == 0 or int(t) == 25):
             print(f"Ignoring {int(t)} degrees at startup")
-            ds.read_temp(sensor)
-        print("Temperature: %f" % t)
-        (r,g,b) = updateLED(t)
-        client.publish(topic_pub, bytes('{"temp":%f}'% t, 'utf-8'))
-        client.publish(topic_wled + '/col', bytes(f'#{r:02x}{g:02x}{b:02x}', 'utf-8'))
-        startup = False
-    time.sleep(DELAY)
+            time.sleep(DELAY / 5)
+        else:
+            print("Temperature: %f" % t)
+            (r,g,b) = updateLED(t)
+            client.publish(topic_pub, bytes('{"temp":%f}'% t, 'utf-8'))
+            client.publish(topic_wled + '/col', bytes(f'#{r:02x}{g:02x}{b:02x}', 'utf-8'))
+            startup = False
+            time.sleep(DELAY)
   except OneWireError as e:
       print("Sensor lost")
       sensors =  waitForSensors(ds)
@@ -110,5 +111,3 @@ while True:
   except Exception as e:
       print("Sensor lost")
       sensors =  waitForSensors(ds)
-
-
