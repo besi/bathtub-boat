@@ -10,12 +10,11 @@ np = neopixel.NeoPixel(Pin(9),1)
 #### Careful GRB instead of RGB ###
 
 DELAY = 3
-IDEAL = 40
+IDEAL = 41
 ## MQTT
 client_id = ubinascii.hexlify(unique_id())
 topic_pub = secrets.mqtt.topic
 topic_wled = secrets.mqtt.topic_wled
-topic_wled_api = 'wled/all/api'
 mqtt_server = secrets.mqtt.host
 mqtt_port = secrets.mqtt.port
 mqtt_user = secrets.mqtt.user
@@ -55,7 +54,8 @@ def connect():
   client.connect()
   print('Connected to %s MQTT broker' % mqtt_server)
   client.publish(topic_pub, bytes('{"status":"hello","temp":-999}', 'utf-8'))
-  client.publish(topic_wled_api, bytes('{"on":true}', 'utf-8'))
+  print(f'Starting any WLED instances via {topic_wled}/api')
+  client.publish(topic_wled+'/api', bytes('{"on":true}', 'utf-8'))
   
   return client
 
@@ -95,10 +95,11 @@ while True:
         t = ds.read_temp(sensor)
         if startup and (int(t) == 85 or int(t) == 0 or int(t) == 25):
             print(f"Ignoring {int(t)} degrees at startup")
+            ds.read_temp(sensor)
         print("Temperature: %f" % t)
         (r,g,b) = updateLED(t)
         client.publish(topic_pub, bytes('{"temp":%f}'% t, 'utf-8'))
-        client.publish(topic_wled, bytes(f'#{r:02x}{g:02x}{b:02x}', 'utf-8'))
+        client.publish(topic_wled + '/col', bytes(f'#{r:02x}{g:02x}{b:02x}', 'utf-8'))
         startup = False
     time.sleep(DELAY)
   except OneWireError as e:
@@ -109,4 +110,5 @@ while True:
   except Exception as e:
       print("Sensor lost")
       sensors =  waitForSensors(ds)
+
 
